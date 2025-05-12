@@ -20,5 +20,26 @@ export class DemoQaPage {
     await methods.pressEnter(this.page);
     await methods.selectRadioButton(this.page, "//input[@id='hobbies-checkbox-2']", true);
     await methods.click(this.page, "//button[@id='submit']");
+    await methods.pressEsc(this.page);
   }
+
+  async handlingAlertsInDemoQA() {
+    await this.openAndFillFormInDemoQA();
+    await methods.clickElementCovered(this.page, "//div[@class='header-text' and contains(., 'Alerts, Frame & Windows')]");
+    await methods.click(this.page, "//span[text()='Alerts']");
+    await methods.click(this.page, "//button[@id='alertButton']");
+    await methods.pressEnter(this.page);
+    await methods.click(this.page, "//button[@id='timerAlertButton']")
+    await this.page.waitForTimeout(6000); //el alerts tarda 5 segundos en aparecer, por eso establecemos una espera de 6
+    await methods.pressEnter(this.page);
+    await methods.click(this.page, "//button[@id='confirmButton']")
+    await methods.pressEnter(this.page);
+    await methods.click(this.page, "//button[@id='promtButton']")
+    await methods.pressEnter(this.page);
+  }
+
+
+
+
+
 }
