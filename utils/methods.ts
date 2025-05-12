@@ -48,9 +48,10 @@ export async function selectDropdown(page: Page, xpath: string, visibleText: str
   }
 }
 
-export async function selectRadioButton(page: Page, selector: string, isXPath = false): Promise<void> {
+export async function selectRadioButton(page: Page, selector: string, isXPath = false): Promise<void> { //Si usamos el xPath, tenemos que marcar true en la llamada del metodo por paramétro
   try {
-    const script = isXPath
+    const script = isXPath  //si es un XPath,  .evaluate busca el elemento, cogemos el primer resultado,
+    //pasamos el evento a true (el del circulo que queremos selccionar) y lanzamos el evento.
       ? `
         const el = document.evaluate("${selector}", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
         if (el) {
@@ -58,6 +59,8 @@ export async function selectRadioButton(page: Page, selector: string, isXPath = 
           el.dispatchEvent(new Event('change', { bubbles: true }));
         }
       `
+      //si es un selector CSS,  .querySelector busca el elemento,
+      //pasamos el evento a true (el del circulo que queremos selccionar) y lanzamos el evento.
       : `
         const el = document.querySelector("${selector}");
         if (el) {
@@ -76,5 +79,13 @@ export async function pressEnter(page: Page): Promise<void> {
     await page.keyboard.press('Enter');
   } catch (ex: any) {
     console.log(`Error pressing Enter: ${ex.message}`);
+  }
+}
+
+export async function pressEsc(page: Page): Promise<void> {
+  try {
+    await page.keyboard.press('Escape');
+  } catch (ex: any) {
+    console.log(`Error pressing Escape: ${ex.message}`);
   }
 }
