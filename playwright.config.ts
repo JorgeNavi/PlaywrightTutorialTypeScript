@@ -30,7 +30,8 @@ export default defineConfig({
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'on-first-retry',
-    headless: false,  // Mostrar el navegador
+    //headless: false,  //Mostrar el navegador
+    headless: !!process.env.CI, //true en CI, false en local, asi en github actions no se ve el navegador y los tests pueden pasar
     launchOptions: {
       slowMo: 100,       // Retrasar cada acción 100ms, debe estar dentro de launchOptions
     },
