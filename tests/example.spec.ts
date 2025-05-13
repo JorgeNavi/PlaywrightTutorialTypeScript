@@ -53,6 +53,115 @@ test("severalFomra_demoQA", async ({ page }) =>{
 
 });
 
+test("checkBox_demoQA", async ({ page }) => {
+
+  const demoQa = new DemoQaPage(page);
+  await demoQa.checkBoxInDemoQAAfterForms();
+
+  ///ASERCIONES:
+
+  //Comprobar que la caja está seleccionada:
+  const boxIsChecked = await page.locator("//span[@class='rct-checkbox']").isChecked();
+  expect(boxIsChecked).toBe(true);
+
+});
+
+test("radioButton_demoQA", async ({ page }) => {
+
+  const demoQA = new DemoQaPage(page);
+  await demoQA.clickRadioButtonAfterCheckBox();
+
+  //ASERCIONES:
+
+  //Comporbar que el botón redondeado está seleccionado:
+  const isChecked = await page.locator("//label[@for='impressiveRadio']").isChecked();
+  expect(isChecked).toBe(true);
+});
+
+test("createRecordWebTable_demoQA", async ({ page }) => {
+
+  const demoQA = new DemoQaPage(page);
+  await demoQA.createRecordInWebTable();
+
+  ///ASERCIONES:
+
+  //Comporbamos que el campo nombre no es nulo y se rellena con los datos corrextos
+  const nameValue = await page.locator("//input[@id='firstName']").inputValue();
+  expect(nameValue).not.toBe(null);
+  expect(nameValue).toBe("Jorge");
+
+  //Comporbamos que el campo apellido no es nulo y se rellena con los datos corrextos
+  const lastNameValue = await page.locator("//input[@id='lastName']").inputValue();
+  expect(lastNameValue).not.toBe(null);
+  expect(lastNameValue).toBe("Moratalla");
+
+  //Comporbamos que el campo email no es nulo y se rellena con los datos corrextos
+  const emailValue = await page.locator("//input[@id='userEmail']").inputValue();
+  expect(emailValue).not.toBe(null);
+  expect(emailValue).toBe("example@example.com");
+
+  //Comporbamos que el edad email no es nulo y se rellena con los datos corrextos
+  const ageValue = await page.locator("//input[@id='age']").inputValue();
+  expect(ageValue).not.toBe(null);
+  expect(ageValue).toBe("33");
+
+  //Comporbamos que el campo salario no es nulo y se rellena con los datos corrextos
+  const salaryValue = await page.locator("//input[@id='salary']").inputValue();
+  expect(salaryValue).not.toBe(null);
+  expect(salaryValue).toBe("1000000");
+
+  //Comporbamos que el campo departamento no es nulo y se rellena con los datos corrextos
+  const departmentValue = await page.locator("//input[@id='department']").inputValue();
+  expect(departmentValue).not.toBe(null);
+  expect(departmentValue).toBe("QA");
+});
+
+test("updateRecordWebTable_demoQA", async ({ page }) => {
+
+  const demoQA = new DemoQaPage(page);
+  await demoQA.updateRecordInWebTable();
+
+  ///ASERCIONES:
+
+  //Comporbamos que el campo nombre no es nulo y se rellena con los datos corrextos
+  const nameValue = await page.locator("//input[@id='firstName']").inputValue();
+  expect(nameValue).not.toBe(null);
+  expect(nameValue).toBe("Eva");
+
+  //Comporbamos que el campo apellido no es nulo y se rellena con los datos corrextos
+  const lastNameValue = await page.locator("//input[@id='lastName']").inputValue();
+  expect(lastNameValue).not.toBe(null);
+  expect(lastNameValue).toBe("Bestilleiro");
+
+  //Comporbamos que el campo email no es nulo y se rellena con los datos corrextos
+  const emailValue = await page.locator("//input[@id='userEmail']").inputValue();
+  expect(emailValue).not.toBe(null);
+  expect(emailValue).toBe("eva@example.com");
+
+  //Comporbamos que el edad email no es nulo y se rellena con los datos corrextos
+  const ageValue = await page.locator("//input[@id='age']").inputValue();
+  expect(ageValue).not.toBe(null);
+  expect(ageValue).toBe("65");
+
+  //Comporbamos que el campo salario no es nulo y se rellena con los datos corrextos
+  const salaryValue = await page.locator("//input[@id='salary']").inputValue();
+  expect(salaryValue).not.toBe(null);
+  expect(salaryValue).toBe("10");
+
+  //Comporbamos que el campo departamento no es nulo y se rellena con los datos corrextos
+  const departmentValue = await page.locator("//input[@id='department']").inputValue();
+  expect(departmentValue).not.toBe(null);
+  expect(departmentValue).toBe("RRHH");
+});
+
+test("deleteRecordWebTable_demoQA", async ({ page }) => {
+  
+  const demoQA = new DemoQaPage(page);
+  await demoQA.deleteRecordInWebTable();
+
+});
+
+
 
 
 

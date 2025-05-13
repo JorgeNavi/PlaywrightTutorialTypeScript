@@ -11,7 +11,7 @@ export class DemoQaPage {
     await this.page.goto('https://demoqa.com');
     await methods.click(this.page, "//div[contains(@class, 'card-body')]/h5[text()='Forms']");
     await methods.click(this.page, "//span[text()='Practice Form']");
-    await methods.sendKeys(this.page, "//input[@id='firstName']", "Jorge");
+    await methods.sendKeys(this.page, "//input[@id='firstName']", "Jorge"); //input[@id='firstName']
     await methods.sendKeys(this.page, "//input[@id='lastName']", "Moratalla");
     await methods.sendKeys(this.page, "//input[@id='userEmail']", "example@example.com");
     await methods.selectRadioButton(this.page, "//input[@id='gender-radio-1']", true);
@@ -46,6 +46,48 @@ export class DemoQaPage {
     await methods.sendKeys(this.page, "//input[@id='userEmail']", "eva@example.com"); 
     await methods.sendKeys(this.page, "//textarea[@id='currentAddress']", "Vivo en la calle de mi casa obviamente");
     await methods.sendKeys(this.page, "//textarea[@id='permanentAddress']", "De nuevo, en mi casa");
+  }
+
+  async checkBoxInDemoQAAfterForms() {
+    await this.fillSeveralFomrsInDemoQA();
+    await methods.click(this.page, "//li[@class='btn btn-light ' and contains(., 'Check Box')]");
+    await methods.click(this.page, "//span[@class='rct-checkbox']");
+  }
+
+  async clickRadioButtonAfterCheckBox() {
+    await this.checkBoxInDemoQAAfterForms();
+    await methods.click(this.page, "//li[@class='btn btn-light ' and contains(., 'Radio Button')]");
+    await methods.click(this.page, "//label[@for='impressiveRadio']");
+  }
+
+  async createRecordInWebTable() {
+    await this.clickRadioButtonAfterCheckBox();
+    await methods.clickElementCovered(this.page, "//li[@class='btn btn-light ' and contains(., 'Web Tables')]");
+    await methods.click(this.page, "//button[@id='addNewRecordButton']");
+    await methods.sendKeys(this.page, "//input[@id='firstName']", "Jorge");
+    await methods.sendKeys(this.page, "//input[@id='lastName']", "Moratalla");
+    await methods.sendKeys(this.page, "//input[@id='userEmail']", "example@example.com");
+    await methods.sendKeys(this.page, "//input[@id='age']", "33");
+    await methods.sendKeys(this.page, "//input[@id='salary']", "1000000");
+    await methods.sendKeys(this.page, "//input[@id='department']", "QA");
+    await methods.click(this.page, "//button[@id='submit']");
+  }
+
+  async updateRecordInWebTable() {
+    await this.createRecordInWebTable();
+    await methods.click(this.page, "(//span[@title='Edit'])[4]");
+    await methods.sendKeys(this.page, "//input[@id='firstName']", "Eva");
+    await methods.sendKeys(this.page, "//input[@id='lastName']", "Bestilleiro");
+    await methods.sendKeys(this.page, "//input[@id='userEmail']", "eva@example.com");
+    await methods.sendKeys(this.page, "//input[@id='age']", "65");
+    await methods.sendKeys(this.page, "//input[@id='salary']", "10");
+    await methods.sendKeys(this.page, "//input[@id='department']", "RRHH");
+    await methods.click(this.page, "//button[@id='submit']");
+  }
+
+  async deleteRecordInWebTable() {
+    await this.updateRecordInWebTable();
+    await methods.click(this.page, "(//span[@title='Delete'])[4]")
   }
 
 
