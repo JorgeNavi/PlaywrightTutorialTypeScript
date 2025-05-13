@@ -38,6 +38,19 @@ export class DemoQaPage {
     await methods.pressEnter(this.page);
   }
 
+  async fillSeveralFomrsInDemoQA() {
+    await this.page.goto('https://demoqa.com');
+    await this.page.waitForTimeout(6000);
+    await methods.clickElementCovered(this.page, "//div[contains(@class, 'card-body')]/h5[text()='Elements']");
+    await methods.clickElementCovered(this.page, "//li[@class='btn btn-light ' and contains(., 'Text Box')]");
+    await methods.sendKeys(this.page, "//input[@id='userName']", "Eva tu RRHH favorita");
+    await methods.sendKeys(this.page, "//input[@id='userEmail']", "eva@example.com"); 
+    await methods.sendKeys(this.page, "//textarea[@id='currentAddress']", "Vivo en la calle de mi casa obviamente");
+    await methods.sendKeys(this.page, "//textarea[@id='permanentAddress']", "De nuevo, en mi casa");
+  }
+
+
+
 
 
 
