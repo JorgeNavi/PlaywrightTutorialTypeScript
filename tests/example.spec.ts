@@ -42,12 +42,12 @@ test("severalFomra_demoQA", async ({ page }) =>{
   expect(emailValue).toBe("eva@example.com");
 
   //Asegurarnos de que el valor del campo currentAdress no es nulo y corresponde con lo esperado
-  const currentAddressValue = await page.locator("//textarea[@id='currentAddress']");
+  const currentAddressValue = await page.locator("//textarea[@id='currentAddress']").inputValue();
   expect(currentAddressValue).not.toBeNull();
   expect(currentAddressValue).toBe("Vivo en la calle de mi casa obviamente");
 
   //Asegurarnos de que el valor del campo currentAdress no es nulo y corresponde con lo esperado
-  const permanentAddressValue = await page.locator("//textarea[@id='permanentAddress']");
+  const permanentAddressValue = await page.locator("//textarea[@id='permanentAddress']").inputValue();
   expect(permanentAddressValue).not.toBeNull();
   expect(permanentAddressValue).toBe("De nuevo, en mi casa");
 
