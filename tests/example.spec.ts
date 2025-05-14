@@ -28,7 +28,7 @@ test("alerts_demoQA", async ({ page }) => {
   await demoQA.handlingAlertsInDemoQA();
 });
 
-test("severalFomra_demoQA", async ({ page }) =>{
+test("severalFomra_demoQA", async ({ page }) => {
   const demoQa = new DemoQaPage(page);
   await demoQa.fillSeveralFomrsInDemoQA();
 
@@ -157,7 +157,7 @@ test("updateRecordWebTable_demoQA", async ({ page }) => {
 });
 
 test("deleteRecordWebTable_demoQA", async ({ page }) => {
-  
+
   const demoQA = new DemoQaPage(page);
   await demoQA.deleteRecordInWebTable();
 
@@ -182,7 +182,38 @@ test('test', async ({ page }) => {
   await page.getByRole('button', { name: 'Submit' }).click();
 });
 
+test("openFramePage_demoQA", async ({ page }) => {
 
+  const demoQA = new DemoQaPage(page);
+  await demoQA.openFramePage();
 
+  
+  ///ASERCIONES:
+
+  // Recogemos todas las páginas/ventanas abiertas
+  const pages = page.context().pages();
+
+  //Comprobamos si se abre Browser Windows
+  const original = pages[0];
+  await expect(original).toHaveURL('https://demoqa.com/browser-windows');
+
+  //Comprobamos si se abre el tabButton
+  const tabPage = pages[1];
+  await expect(tabPage).toHaveURL('https://demoqa.com/sample');
+  await expect(tabPage.locator('h1')).toHaveText('This is a sample page');
+
+  //Comprobamos si se abre el new Window
+  const windowPage = pages[2];
+  await expect(windowPage).toHaveURL('https://demoqa.com/sample');
+  await expect(windowPage.locator('h1')).toHaveText('This is a sample page');
+
+  //Comprobamos si se abre el new Window Message
+  // Validamos su contenido de <body>
+  const messagePage = pages[3];
+  await expect(messagePage.locator('body')).toContainText(
+    'Knowledge increases by sharing but not by saving. Please share this website with your friends and in your organization.'
+  );
+
+});
 
 

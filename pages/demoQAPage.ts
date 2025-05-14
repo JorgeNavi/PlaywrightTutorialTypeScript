@@ -8,7 +8,7 @@ export class DemoQaPage {
   static openAndFillFormInDemoQA(page: Page) {
     throw new Error('Method not implemented.');
   }
-  constructor(private page: Page) {}
+  constructor(private page: Page) { }
 
   async openAndFillFormInDemoQA() {
     await this.page.goto('https://demoqa.com');
@@ -46,7 +46,7 @@ export class DemoQaPage {
     await methods.clickElementCovered(this.page, "(//div[@class='card mt-4 top-card'])[1]");
     await methods.clickElementCovered(this.page, "//li[@class='btn btn-light ' and contains(., 'Text Box')]");
     await methods.sendKeys(this.page, "//input[@id='userName']", "Eva tu RRHH favorita");
-    await methods.sendKeys(this.page, "//input[@id='userEmail']", "eva@example.com"); 
+    await methods.sendKeys(this.page, "//input[@id='userEmail']", "eva@example.com");
     await methods.sendKeys(this.page, "//textarea[@id='currentAddress']", "Vivo en la calle de mi casa obviamente");
     await methods.sendKeys(this.page, "//textarea[@id='permanentAddress']", "De nuevo, en mi casa");
   }
@@ -93,6 +93,23 @@ export class DemoQaPage {
     await methods.pressEnter(this.page);
     await methods.click(this.page, "(//span[@title='Delete'])[4]")
   }
+
+  async openFramePage() {
+    const pages = this.page.context().pages();
+
+    const original = pages[0];
+
+    await this.page.goto("https://demoqa.com/");
+    await methods.click(this.page, "(//div[@class='card mt-4 top-card'])[3]");
+    await methods.click(this.page, "//span[text()='Browser Windows']");
+    await methods.click(this.page, "//button[@id='tabButton']");
+    await original.bringToFront();
+    await methods.click(this.page, "//button[@id='windowButton']");
+    await methods.click(this.page, "//button[@id='messageWindowButton']");
+  }
+
+  
+
 
 
 
