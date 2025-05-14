@@ -1,6 +1,8 @@
 // utils/methods.ts
 import { Page } from '@playwright/test';
 
+// MARK: Fichero donde establecemos nuestros métodos personalizados que modifican/amplian los básicos de Playwright
+
 export async function sendKeys(page: Page, xpath: string, text: string): Promise<void> {
   try {
     const locator = page.locator(`xpath=${xpath}`);
