@@ -1,6 +1,8 @@
 import { test, expect } from '@playwright/test';
 import { DemoQaPage } from '../pages/demoQAPage';
 
+// MARK: TESTS
+
 
 test("demoQA_1", async ({ page }) => {
   const demoQa = new DemoQaPage(page); //usar constructor, se instancia la page

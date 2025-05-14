@@ -1,6 +1,9 @@
 import { Page } from '@playwright/test';
 import * as methods from '../utils/methods';
 
+
+// MARK: Clase "Page" con los pasos que deben realizar los tests
+
 export class DemoQaPage {
   static openAndFillFormInDemoQA(page: Page) {
     throw new Error('Method not implemented.');
@@ -61,7 +64,8 @@ export class DemoQaPage {
   }
 
   async createRecordInWebTable() {
-    await this.clickRadioButtonAfterCheckBox();
+    await this.page.goto('https://demoqa.com');
+    await methods.clickElementCovered(this.page, "(//div[@class='card mt-4 top-card'])[1]");
     await methods.clickElementCovered(this.page, "//li[@class='btn btn-light ' and contains(., 'Web Tables')]");
     await methods.click(this.page, "//button[@id='addNewRecordButton']");
     await methods.sendKeys(this.page, "//input[@id='firstName']", "Jorge");
