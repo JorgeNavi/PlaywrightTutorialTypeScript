@@ -1,5 +1,5 @@
 // utils/methods.ts
-import { Page } from '@playwright/test';
+import { Frame, Page } from '@playwright/test';
 
 // MARK: Fichero donde establecemos nuestros métodos personalizados que modifican/amplian los básicos de Playwright
 
@@ -90,4 +90,25 @@ export async function pressEsc(page: Page): Promise<void> {
   } catch (ex: any) {
     console.log(`Error pressing Escape: ${ex.message}`);
   }
+}
+
+export async function switchToIframe(page: Page, xpath: string) : Promise<Frame> {
+  try{
+    // Encuentras el iframe en el DOM
+     const iframeElement = await page.waitForSelector(`xpath=${xpath}`, { timeout: 5000 });
+
+    // Obtienes el Frame real
+    const frame = await iframeElement.contentFrame();
+
+     if (!frame) {
+      throw new Error(`No se pudo obtener el contenido del iframe con XPath: ${xpath}`);
+    }
+
+    return frame;
+    
+  } catch (error) {
+    // Al lanzar siempre un error aquí, TypeScript ya sabe que nunca se sale sin devolver
+    throw new Error(`Error al cambiar al iframe con XPath ${xpath}: ${String(error)}`);
+  }
+
 }
