@@ -2,12 +2,12 @@
   "name": "playwrighttutorialtypescript",
   "version": "1.0.0",
   "main": "index.js",
-  "scripts": {  
-  "test": "npx playwright test",
-  "test:headed": "npx playwright test --headed",
-  "test:debug": "npx playwright test --debug",
-  "codegen": "npx playwright codegen"
-},
+  "scripts": {
+    "test": "npx playwright test",
+    "test:headed": "npx playwright test --headed",
+    "test:debug": "npx playwright test --debug",
+    "codegen": "npx playwright codegen"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
@@ -15,5 +15,8 @@
   "devDependencies": {
     "@playwright/test": "^1.52.0",
     "@types/node": "^22.15.17"
+  },
+  "dependencies": {
+    "playwrighttutorialtypescript": "file:"
   }
 }

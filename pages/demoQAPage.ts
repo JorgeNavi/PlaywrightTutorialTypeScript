@@ -74,11 +74,11 @@ export class DemoQaPage {
     await methods.sendKeys(this.page, "//input[@id='age']", "33");
     await methods.sendKeys(this.page, "//input[@id='salary']", "1000000");
     await methods.sendKeys(this.page, "//input[@id='department']", "QA");
-    await methods.click(this.page, "//button[@id='submit']");
   }
 
   async updateRecordInWebTable() {
     await this.createRecordInWebTable();
+    await methods.pressEnter(this.page);
     await methods.click(this.page, "(//span[@title='Edit'])[4]");
     await methods.sendKeys(this.page, "//input[@id='firstName']", "Eva");
     await methods.sendKeys(this.page, "//input[@id='lastName']", "Bestilleiro");
@@ -86,11 +86,11 @@ export class DemoQaPage {
     await methods.sendKeys(this.page, "//input[@id='age']", "65");
     await methods.sendKeys(this.page, "//input[@id='salary']", "10");
     await methods.sendKeys(this.page, "//input[@id='department']", "RRHH");
-    await methods.click(this.page, "//button[@id='submit']");
   }
 
   async deleteRecordInWebTable() {
     await this.updateRecordInWebTable();
+    await methods.pressEnter(this.page);
     await methods.click(this.page, "(//span[@title='Delete'])[4]")
   }
 
