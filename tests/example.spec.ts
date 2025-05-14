@@ -164,6 +164,25 @@ test("deleteRecordWebTable_demoQA", async ({ page }) => {
 });
 
 
+// MARK: Este test está realizado con la funcionalidad de "grabación". Comando: npx playwright codegen https://demoqa.com
+test('test', async ({ page }) => {
+  await page.goto('https://demoqa.com/');
+  await page.locator('svg').first().click();
+  await page.getByText('Text Box').click();
+  await page.getByRole('textbox', { name: 'Full Name' }).click();
+  await page.getByRole('textbox', { name: 'Full Name' }).fill('Jorge');
+  await page.getByRole('textbox', { name: 'name@example.com' }).click();
+  await page.getByRole('textbox', { name: 'name@example.com' }).fill('jorge');
+  await page.getByRole('textbox', { name: 'name@example.com' }).press('Alt+@');
+  await page.getByRole('textbox', { name: 'name@example.com' }).fill('jorge.navidad');
+  await page.getByRole('textbox', { name: 'name@example.com' }).press('Tab');
+  await page.getByRole('textbox', { name: 'Current Address' }).fill('mi casa');
+  await page.locator('#permanentAddress').click();
+  await page.locator('#permanentAddress').fill('tambien');
+  await page.getByRole('button', { name: 'Submit' }).click();
+});
+
+
 
 
 
