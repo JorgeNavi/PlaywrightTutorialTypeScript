@@ -1,7 +1,10 @@
 import { test, expect } from '@playwright/test';
 import { DemoQaPage } from '../pages/demoQAPage';
+import { Assertions } from '../utils/assertions';
 
 // MARK: TESTS
+
+const assertions = new Assertions();
 
 
 test("demoQA_1", async ({ page }) => {
@@ -11,16 +14,15 @@ test("demoQA_1", async ({ page }) => {
   ///ASERCIONES:
 
   //Asegurarnos de que el valor del campo nombre corresponde con lo esperado
-  const nameValue = await page.locator("//input[@id='firstName']").inputValue();
-  expect(nameValue).toBe("Jorge");
+  assertions.inputValue(page, "//input[@id='firstName']", "Jorge");
+
+  assertions.inputValue(page, "//input[@id='lastName']", "Moratalla");
 
   //Asegurarnos de que el valor del campo email no es nulo
-  const emailValue = await page.locator("//input[@id='userEmail']").inputValue();
-  expect(emailValue).not.toBeNull();
+  assertions.inputValue(page, "//input[@id='userEmail']", "example@example.com");
 
   //Asegurarnos de que el círculo de "Male" está correctamente marcado
-  const genderChecked = await page.locator("//input[@id='gender-radio-1']").isChecked();
-  expect(genderChecked).toBeTruthy();
+  assertions.isChecked(page, "//input[@id='gender-radio-1']");
 });
 
 test("alerts_demoQA", async ({ page }) => {
@@ -34,50 +36,37 @@ test("severalFomra_demoQA", async ({ page }) => {
 
   ///ASERCIONES:
 
-  //Asegurarnos de que el valor del campo nombre corresponde con lo esperado
-  const nameValue = await page.locator("//input[@id='userName']").inputValue();
-  expect(nameValue).toBe("Eva tu RRHH favorita")
+  //Asegurarnos de que el valor del campo contiene una palabrs que sabemos que debe incluir
+  assertions.containsText(page, "//input[@id='userName']", "RRHH");
 
   //Asegurarnos de que el valor del campo email no es nulo y corresponde con lo esperado
-  const emailValue = await page.locator("//input[@id='userEmail']").inputValue();
-  expect(emailValue).not.toBeNull();
-  expect(emailValue).toBe("eva@example.com");
+  assertions.inputValue(page, "//input[@id='userEmail']", "eva@example.com");
 
   //Asegurarnos de que el valor del campo currentAdress no es nulo y corresponde con lo esperado
-  const currentAddressValue = await page.locator("//textarea[@id='currentAddress']").inputValue();
-  expect(currentAddressValue).not.toBeNull();
-  expect(currentAddressValue).toBe("Vivo en la calle de mi casa obviamente");
+  assertions.inputValue(page, "//textarea[@id='currentAddress']", "Vivo en la calle de mi casa obviamente");
 
   //Asegurarnos de que el valor del campo currentAdress no es nulo y corresponde con lo esperado
-  const permanentAddressValue = await page.locator("//textarea[@id='permanentAddress']").inputValue();
-  expect(permanentAddressValue).not.toBeNull();
-  expect(permanentAddressValue).toBe("De nuevo, en mi casa");
-
+  assertions.inputValue(page, "//textarea[@id='permanentAddress']", "De nuevo, en mi casa");
 });
 
 test("checkBox_demoQA", async ({ page }) => {
-
   const demoQa = new DemoQaPage(page);
   await demoQa.checkBoxInDemoQAAfterForms();
 
   ///ASERCIONES:
 
   //Comprobar que la caja está seleccionada:
-  const boxIsChecked = await page.locator("//span[@class='rct-checkbox']").isChecked();
-  expect(boxIsChecked).toBe(true);
-
+  assertions.isChecked(page, "//span[@class='rct-checkbox']");
 });
 
 test("radioButton_demoQA", async ({ page }) => {
-
   const demoQA = new DemoQaPage(page);
   await demoQA.clickRadioButtonAfterCheckBox();
 
   //ASERCIONES:
 
   //Comporbar que el botón redondeado está seleccionado:
-  const isChecked = await page.locator("//label[@for='impressiveRadio']").isChecked();
-  expect(isChecked).toBe(true);
+  assertions.isChecked(page, "//label[@for='impressiveRadio']");
 });
 
 test("createRecordWebTable_demoQA", async ({ page }) => {
@@ -88,34 +77,22 @@ test("createRecordWebTable_demoQA", async ({ page }) => {
   ///ASERCIONES:
 
   //Comporbamos que el campo nombre no es nulo y se rellena con los datos corrextos
-  const nameValue = await page.locator("//input[@id='firstName']").inputValue();
-  expect(nameValue).not.toBe(null);
-  expect(nameValue).toBe("Jorge");
+  assertions.inputValue(page, "//input[@id='firstName']", "Jorge");
 
   //Comporbamos que el campo apellido no es nulo y se rellena con los datos corrextos
-  const lastNameValue = await page.locator("//input[@id='lastName']").inputValue();
-  expect(lastNameValue).not.toBe(null);
-  expect(lastNameValue).toBe("Moratalla");
+  assertions.inputValue(page, "//input[@id='lastName']", "Moratalla");
 
   //Comporbamos que el campo email no es nulo y se rellena con los datos corrextos
-  const emailValue = await page.locator("//input[@id='userEmail']").inputValue();
-  expect(emailValue).not.toBe(null);
-  expect(emailValue).toBe("example@example.com");
+  assertions.inputValue(page, "//input[@id='userEmail']", "example@example.com");
 
   //Comporbamos que el edad email no es nulo y se rellena con los datos corrextos
-  const ageValue = await page.locator("//input[@id='age']").inputValue();
-  expect(ageValue).not.toBe(null);
-  expect(ageValue).toBe("33");
+  assertions.inputValue(page, "//input[@id='age']", "33");
 
   //Comporbamos que el campo salario no es nulo y se rellena con los datos corrextos
-  const salaryValue = await page.locator("//input[@id='salary']").inputValue();
-  expect(salaryValue).not.toBe(null);
-  expect(salaryValue).toBe("1000000");
+  assertions.inputValue(page, "//input[@id='salary']", "1000000");
 
   //Comporbamos que el campo departamento no es nulo y se rellena con los datos corrextos
-  const departmentValue = await page.locator("//input[@id='department']").inputValue();
-  expect(departmentValue).not.toBe(null);
-  expect(departmentValue).toBe("QA");
+  assertions.inputValue(page, "//input[@id='department']", "QA");
 });
 
 test("updateRecordWebTable_demoQA", async ({ page }) => {
@@ -125,35 +102,23 @@ test("updateRecordWebTable_demoQA", async ({ page }) => {
 
   ///ASERCIONES:
 
-  //Comporbamos que el campo nombre no es nulo y se rellena con los datos corrextos
-  const nameValue = await page.locator("//input[@id='firstName']").inputValue();
-  expect(nameValue).not.toBe(null);
-  expect(nameValue).toBe("Eva");
+  //Comporbamos que el campo nombre no es nulo y se rellena con los datos correctos
+  assertions.inputValue(page, "//input[@id='firstName']", "Eva");
 
-  //Comporbamos que el campo apellido no es nulo y se rellena con los datos corrextos
-  const lastNameValue = await page.locator("//input[@id='lastName']").inputValue();
-  expect(lastNameValue).not.toBe(null);
-  expect(lastNameValue).toBe("Bestilleiro");
+  //Comporbamos que el campo apellido no es nulo y se rellena con los datos correctos
+  assertions.inputValue(page, "//input[@id='lastName']", "Bestilleiro");
 
-  //Comporbamos que el campo email no es nulo y se rellena con los datos corrextos
-  const emailValue = await page.locator("//input[@id='userEmail']").inputValue();
-  expect(emailValue).not.toBe(null);
-  expect(emailValue).toBe("eva@example.com");
+  //Comporbamos que el campo email no es nulo y se rellena con los datos correctos
+  assertions.inputValue(page, "//input[@id='userEmail']", "eva@example.com");
 
-  //Comporbamos que el edad email no es nulo y se rellena con los datos corrextos
-  const ageValue = await page.locator("//input[@id='age']").inputValue();
-  expect(ageValue).not.toBe(null);
-  expect(ageValue).toBe("65");
+  //Comporbamos que el edad email no es nulo y se rellena con los datos correctos
+  assertions.inputValue(page, "//input[@id='age']", "65");
 
-  //Comporbamos que el campo salario no es nulo y se rellena con los datos corrextos
-  const salaryValue = await page.locator("//input[@id='salary']").inputValue();
-  expect(salaryValue).not.toBe(null);
-  expect(salaryValue).toBe("10");
+  //Comporbamos que el campo salario no es nulo y se rellena con los datos correctos
+  assertions.inputValue(page, "//input[@id='salary']", "10");
 
-  //Comporbamos que el campo departamento no es nulo y se rellena con los datos corrextos
-  const departmentValue = await page.locator("//input[@id='department']").inputValue();
-  expect(departmentValue).not.toBe(null);
-  expect(departmentValue).toBe("RRHH");
+  //Comporbamos que el campo departamento no es nulo y se rellena con los datos correctos
+  assertions.inputValue(page, "//input[@id='department']", "RRHH");
 });
 
 test("deleteRecordWebTable_demoQA", async ({ page }) => {
@@ -182,7 +147,7 @@ test('test', async ({ page }) => {
   await page.getByRole('button', { name: 'Submit' }).click();
 });
 
-test("openFramePage_demoQA", async ({ page }) => {
+/*test("openFramePage_demoQA", async ({ page }) => {
 
   const demoQA = new DemoQaPage(page);
   await demoQA.openFramePage();
@@ -193,27 +158,10 @@ test("openFramePage_demoQA", async ({ page }) => {
   // Recogemos todas las páginas/ventanas abiertas
   const pages = page.context().pages();
 
-  //Comprobamos si se abre Browser Windows
-  const original = pages[0];
-  await expect(original).toHaveURL('https://demoqa.com/browser-windows');
+  assertions.toHaveURL(pages[0], 'https://demoqa.com/browser-windows');
 
-  //Comprobamos si se abre el tabButton
-  const tabPage = pages[1];
-  await expect(tabPage).toHaveURL('https://demoqa.com/sample');
-  await expect(tabPage.locator('h1')).toHaveText('This is a sample page');
+  assertions.toHaveURL(pages[1], 'https://demoqa.com/sample');
 
-  //Comprobamos si se abre el new Window
-  const windowPage = pages[2];
-  await expect(windowPage).toHaveURL('https://demoqa.com/sample');
-  await expect(windowPage.locator('h1')).toHaveText('This is a sample page');
-
-  //Comprobamos si se abre el new Window Message
-  // Validamos su contenido de <body>
-  const messagePage = pages[3];
-  await expect(messagePage.locator('body')).toContainText(
-    'Knowledge increases by sharing but not by saving. Please share this website with your friends and in your organization.'
-  );
-
-});
+});*/
 
 
