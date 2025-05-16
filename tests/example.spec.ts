@@ -1,6 +1,7 @@
 import { test, expect } from '@playwright/test';
 import { DemoQaPage } from '../pages/demoQAPage';
 import { Assertions } from '../utils/assertions';
+import { Locators } from '../utils/locators';
 
 // MARK: TESTS
 
@@ -14,15 +15,15 @@ test("demoQA_1", async ({ page }) => {
   ///ASERCIONES:
 
   //Asegurarnos de que el valor del campo nombre corresponde con lo esperado
-  assertions.inputValue(page, "//input[@id='firstName']", "Jorge");
+  assertions.inputValue(page, Locators.userFirstName, "Jorge");
 
-  assertions.inputValue(page, "//input[@id='lastName']", "Moratalla");
+  assertions.inputValue(page, Locators.userLastName, "Moratalla");
 
   //Asegurarnos de que el valor del campo email no es nulo
-  assertions.inputValue(page, "//input[@id='userEmail']", "example@example.com");
+  assertions.inputValue(page, Locators.userEmail, "example@example.com");
 
   //Asegurarnos de que el círculo de "Male" está correctamente marcado
-  assertions.isChecked(page, "//input[@id='gender-radio-1']");
+  assertions.isChecked(page, Locators.genderRadioButton);
 });
 
 test("alerts_demoQA", async ({ page }) => {
@@ -30,23 +31,23 @@ test("alerts_demoQA", async ({ page }) => {
   await demoQA.handlingAlertsInDemoQA();
 });
 
-test("severalFomra_demoQA", async ({ page }) => {
+test("severalForms_demoQA", async ({ page }) => {
   const demoQa = new DemoQaPage(page);
   await demoQa.fillSeveralFomrsInDemoQA();
 
   ///ASERCIONES:
 
   //Asegurarnos de que el valor del campo contiene una palabrs que sabemos que debe incluir
-  assertions.containsText(page, "//input[@id='userName']", "RRHH");
+  assertions.containsText(page, Locators.userFullName, "RRHH");
 
   //Asegurarnos de que el valor del campo email no es nulo y corresponde con lo esperado
-  assertions.inputValue(page, "//input[@id='userEmail']", "eva@example.com");
+  assertions.inputValue(page, Locators.userEmail, "eva@example.com");
 
   //Asegurarnos de que el valor del campo currentAdress no es nulo y corresponde con lo esperado
-  assertions.inputValue(page, "//textarea[@id='currentAddress']", "Vivo en la calle de mi casa obviamente");
+  assertions.inputValue(page, Locators.userCurrentAddress, "Vivo en la calle de mi casa obviamente");
 
   //Asegurarnos de que el valor del campo currentAdress no es nulo y corresponde con lo esperado
-  assertions.inputValue(page, "//textarea[@id='permanentAddress']", "De nuevo, en mi casa");
+  assertions.inputValue(page, Locators.userPermanentAddress, "De nuevo, en mi casa");
 });
 
 test("checkBox_demoQA", async ({ page }) => {
@@ -56,7 +57,7 @@ test("checkBox_demoQA", async ({ page }) => {
   ///ASERCIONES:
 
   //Comprobar que la caja está seleccionada:
-  assertions.isChecked(page, "//span[@class='rct-checkbox']");
+  assertions.isChecked(page, Locators.checkBoxCircle);
 });
 
 test("radioButton_demoQA", async ({ page }) => {
@@ -66,7 +67,7 @@ test("radioButton_demoQA", async ({ page }) => {
   //ASERCIONES:
 
   //Comporbar que el botón redondeado está seleccionado:
-  assertions.isChecked(page, "//label[@for='impressiveRadio']");
+  assertions.isChecked(page, Locators.impressiveLabel);
 });
 
 test("createRecordWebTable_demoQA", async ({ page }) => {
@@ -77,22 +78,22 @@ test("createRecordWebTable_demoQA", async ({ page }) => {
   ///ASERCIONES:
 
   //Comporbamos que el campo nombre no es nulo y se rellena con los datos corrextos
-  assertions.inputValue(page, "//input[@id='firstName']", "Jorge");
+  assertions.inputValue(page, Locators.userFirstName, "Jorge");
 
   //Comporbamos que el campo apellido no es nulo y se rellena con los datos corrextos
-  assertions.inputValue(page, "//input[@id='lastName']", "Moratalla");
+  assertions.inputValue(page, Locators.userLastName, "Moratalla");
 
   //Comporbamos que el campo email no es nulo y se rellena con los datos corrextos
-  assertions.inputValue(page, "//input[@id='userEmail']", "example@example.com");
+  assertions.inputValue(page, Locators.userEmail, "example@example.com");
 
   //Comporbamos que el edad email no es nulo y se rellena con los datos corrextos
-  assertions.inputValue(page, "//input[@id='age']", "33");
+  assertions.inputValue(page, Locators.userAge, "33");
 
   //Comporbamos que el campo salario no es nulo y se rellena con los datos corrextos
-  assertions.inputValue(page, "//input[@id='salary']", "1000000");
+  assertions.inputValue(page, Locators.userSalary, "1000000");
 
   //Comporbamos que el campo departamento no es nulo y se rellena con los datos corrextos
-  assertions.inputValue(page, "//input[@id='department']", "QA");
+  assertions.inputValue(page, Locators.userDepartment, "QA");
 });
 
 test("updateRecordWebTable_demoQA", async ({ page }) => {
@@ -103,22 +104,22 @@ test("updateRecordWebTable_demoQA", async ({ page }) => {
   ///ASERCIONES:
 
   //Comporbamos que el campo nombre no es nulo y se rellena con los datos correctos
-  assertions.inputValue(page, "//input[@id='firstName']", "Eva");
+  assertions.inputValue(page, Locators.userFirstName, "Eva");
 
   //Comporbamos que el campo apellido no es nulo y se rellena con los datos correctos
-  assertions.inputValue(page, "//input[@id='lastName']", "Bestilleiro");
+  assertions.inputValue(page, Locators.userLastName, "Bestilleiro");
 
   //Comporbamos que el campo email no es nulo y se rellena con los datos correctos
-  assertions.inputValue(page, "//input[@id='userEmail']", "eva@example.com");
+  assertions.inputValue(page, Locators.userEmail, "eva@example.com");
 
   //Comporbamos que el edad email no es nulo y se rellena con los datos correctos
-  assertions.inputValue(page, "//input[@id='age']", "65");
+  assertions.inputValue(page, Locators.userAge, "65");
 
   //Comporbamos que el campo salario no es nulo y se rellena con los datos correctos
-  assertions.inputValue(page, "//input[@id='salary']", "10");
+  assertions.inputValue(page, Locators.userSalary, "10");
 
   //Comporbamos que el campo departamento no es nulo y se rellena con los datos correctos
-  assertions.inputValue(page, "//input[@id='department']", "RRHH");
+  assertions.inputValue(page, Locators.userDepartment, "RRHH");
 });
 
 test("deleteRecordWebTable_demoQA", async ({ page }) => {
