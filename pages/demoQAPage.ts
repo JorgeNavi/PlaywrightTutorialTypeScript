@@ -14,7 +14,7 @@ export class DemoQaPage {
     await this.page.goto('https://demoqa.com');
     await methods.click(this.page, "//div[contains(@class, 'card-body')]/h5[text()='Forms']");
     await methods.click(this.page, "//span[text()='Practice Form']");
-    await methods.sendKeys(this.page, "//input[@id='firstName']", "Jorge"); //input[@id='firstName']
+    await methods.sendKeys(this.page, "//input[@id='firstName']", "Jorge"); 
     await methods.sendKeys(this.page, "//input[@id='lastName']", "Moratalla");
     await methods.sendKeys(this.page, "//input[@id='userEmail']", "example@example.com");
     await methods.selectRadioButton(this.page, "//input[@id='gender-radio-1']", true);
@@ -107,14 +107,5 @@ export class DemoQaPage {
     await methods.click(this.page, "//button[@id='windowButton']");
     await methods.click(this.page, "//button[@id='messageWindowButton']");
   }
-
-  
-
-
-
-
-
-
-
 
 }
