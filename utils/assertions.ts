@@ -1,5 +1,5 @@
 
-import { expect, Frame, Page } from '@playwright/test';
+import { expect, Page } from '@playwright/test';
 
 export class Assertions {
 
